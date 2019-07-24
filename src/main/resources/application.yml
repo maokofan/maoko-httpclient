@@ -1,0 +1,10 @@
+#application.yml 配置文件
+server:
+  port: 8188
+
+#任务线程池配置
+http:
+   pool-size: 5
+   max-pool-size: 10
+   queue-capacity: 25
+
