@@ -1,8 +1,11 @@
 package maoko.http.core;
 
+import maoko.http.conf.HttpTdPoolConf;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 处理关闭连接的线程
@@ -10,15 +13,17 @@ import org.springframework.stereotype.Component;
  * @author fanpei
  */
 @Component
-public class HttpIdleCOnnectionEvictor extends Thread {
+public class HttpIdleConnectionExecutor extends Thread {
 
-    @Autowired
-    private HttpClientConnectionManager connMgr;
+    private final HttpClientConnectionManager connMgr;
+    private final HttpTdPoolConf conf;
 
     private volatile boolean shutDown;
 
-    public HttpIdleCOnnectionEvictor() {
+    public HttpIdleConnectionExecutor(HttpClientConnectionManager connMgr, HttpTdPoolConf conf) {
         super();
+        this.connMgr = connMgr;
+        this.conf = conf;
         super.start();
     }
 
@@ -29,6 +34,8 @@ public class HttpIdleCOnnectionEvictor extends Thread {
                 synchronized (this) {
                     wait(5000);
                     connMgr.closeExpiredConnections();
+                    // that have been idle longer than 30 sec
+                    connMgr.closeIdleConnections(conf.getIdelConectionCloseTimeout(), TimeUnit.SECONDS);
                 }
             }
         } catch (Exception e) {
@@ -36,6 +43,9 @@ public class HttpIdleCOnnectionEvictor extends Thread {
         }
     }
 
+    /**
+     * 关闭
+     */
     public void shutDown() {
         shutDown = true;
         synchronized (this) {

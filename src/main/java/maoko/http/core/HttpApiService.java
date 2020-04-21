@@ -1,7 +1,7 @@
 package maoko.http.core;
 
 
-import maoko.http.DateUtil;
+import maoko.common.DateFormatUtil;
 import maoko.http.conf.HttpPlatConf;
 import maoko.http.core.entity.HttpParams;
 import maoko.http.exception.HttpQueryException;
@@ -27,7 +27,7 @@ import java.util.Date;
  * http客户端，get、post、put、delete请求
  */
 @Service
-public class HttpAPIService {
+public class HttpApiService {
     private static final String ENCODING = "UTF-8";
     private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
     private static final String HEADER_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36";
@@ -48,8 +48,9 @@ public class HttpAPIService {
      * @throws Exception
      */
     public HttpResult sendRequest2Server(HttpParams params) throws Exception {
-        if (params == null)
+        if (params == null) {
             throw new Exception("http params is null");
+        }
 
         HttpResult result = null;
         HttpUriRequest httpRequest = null;
@@ -61,7 +62,7 @@ public class HttpAPIService {
             case PUT:
                 httpRequest = new HttpPut(url);
                 break;
-            case POST:// update
+            case POST:
                 httpRequest = new HttpPost(url);
                 break;
             case DELETE:
@@ -111,13 +112,15 @@ public class HttpAPIService {
             // 获取结果
             result = new HttpResult(response);
             printReponse(httpRequest, result);
-            if (!result.isOK())
+            if (!result.isOK()) {
                 throw new HttpQueryException(result.toString());
+            }
 
         } finally {
             // 释放链接
-            if (response != null)
+            if (response != null) {
                 response.close();
+            }
         }
         return result;
     }
@@ -156,7 +159,7 @@ public class HttpAPIService {
      */
     private void printRequest(HttpParams param, HttpRequest httpRequest) throws IOException {
         StringBuilder requestSb = new StringBuilder();
-        requestSb.append("<--发送请求信息，请求时间：").append(DateUtil.format(new Date()))
+        requestSb.append("<--发送请求信息，请求时间：").append(DateFormatUtil.dateformat(new Date()))
                 .append(System.lineSeparator());
         requestSb.append("请求方法：").append(httpRequest.toString()).append(System.lineSeparator());
         if (httpRequest instanceof HttpEntityEnclosingRequestBase) {
@@ -180,11 +183,10 @@ public class HttpAPIService {
      */
     private void printReponse(HttpUriRequest request, HttpResult result) {
         StringBuilder requestSb = new StringBuilder();
-        requestSb.append("-->解析请求返回，返回时间：").append(DateUtil.format(new Date()))
+        requestSb.append("-->解析请求返回，返回时间：").append(DateFormatUtil.dateformat(new Date()))
                 .append(System.lineSeparator());
         requestSb.append("请求地址：").append(request.getURI().toString()).append(System.lineSeparator());
         requestSb.append("返回详情:").append(result.toString()).append(System.lineSeparator());
-        ;
         System.out.println(requestSb.toString());
     }
 }

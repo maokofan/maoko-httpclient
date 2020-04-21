@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "http-server")
 public class HttpPlatConf {
 
-    // private String ip = "109.64.10.49";
     private String serverIP = "109.64.20.99";
     private int serverPort = 6070;
 

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author fanpei
  */
 @Component
-public class HttpClientBean {
+public class HttpClientManaeger {
 
     @Autowired
     HttpTdPoolConf conf;
@@ -64,14 +64,15 @@ public class HttpClientBean {
      *
      * @return
      */
-    // @SuppressWarnings("deprecation")
     @Bean(name = "builder")
     public RequestConfig.Builder getBuilder() {
         RequestConfig.Builder builder = RequestConfig.custom();
         return builder.setConnectTimeout(conf.getConnectTimeout())
-                .setConnectionRequestTimeout(conf.getConnectionRequestTimeout())//
-                .setSocketTimeout(conf.getMaxTotal())//
-                .setStaleConnectionCheckEnabled(conf.isStaleConnectionCheckEnabled());
+                .setConnectionRequestTimeout(conf.getConnectionRequestTimeout())
+                .setSocketTimeout(conf.getMaxTotal());
+        //fanpei 过时配置改为线程定时删除 2020.4.21
+        //.setStaleConnectionCheckEnabled(conf.isStaleConnectionCheckEnabled());
+
     }
 
     @Bean
