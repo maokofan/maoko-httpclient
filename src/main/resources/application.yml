@@ -1,10 +1,14 @@
-#application.yml 配置文件
-server:
-  port: 8188
+#远程Http Server配置
+http-server:
+  serverIP: 127.0.0.1
+  serverPort: 8189
 
-#任务线程池配置
-http:
-   pool-size: 5
-   max-pool-size: 10
-   queue-capacity: 25
+#客户端池配置
+http-client:
+  maxTotal: 100                    #最大连接数
+  defaultMaxPerRoute: 50           #并发数
+  connectTimeout: 1000             #创建连接最长超时时间
+  connectionRequestTimeout: 5000    #从连接池中获取连接的最长时间
+  socketTimeout: 10000             #等待数据超时时间
+  idelConectionCloseTimeout: 30000 #空闲Client关闭时长
 

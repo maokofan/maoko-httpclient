@@ -44,6 +44,7 @@ public class HttpClientManaeger {
     public HttpClientBuilder getHttpClientBuilder(
             @Qualifier("httpClientConnectionManager") PoolingHttpClientConnectionManager connManager) {
         HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+        //httpClientBuilder.setDefaultRequestConfig(requestconf);
         httpClientBuilder.setConnectionManager(connManager);
         return httpClientBuilder;
     }
@@ -59,25 +60,16 @@ public class HttpClientManaeger {
         return httpClientBuilder.build();
     }
 
-    /**
-     * builder是requestConfig内部类，通过custom获取一个builder对象爱你乖，设置builder的连接信息
-     *
-     * @return
-     */
-    @Bean(name = "builder")
-    public RequestConfig.Builder getBuilder() {
+    @Bean
+    public RequestConfig getRequestConfig() {
         RequestConfig.Builder builder = RequestConfig.custom();
-        return builder.setConnectTimeout(conf.getConnectTimeout())
+        builder.setConnectTimeout(conf.getConnectTimeout())
                 .setConnectionRequestTimeout(conf.getConnectionRequestTimeout())
-                .setSocketTimeout(conf.getMaxTotal());
+                .setSocketTimeout(conf.getSocketTimeout());
         //fanpei 过时配置改为线程定时删除 2020.4.21
         //.setStaleConnectionCheckEnabled(conf.isStaleConnectionCheckEnabled());
-
-    }
-
-    @Bean
-    public RequestConfig getRequestConfig(@Qualifier("builder") RequestConfig.Builder builder) {
         return builder.build();
     }
+
 
 }

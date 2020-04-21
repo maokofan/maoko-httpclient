@@ -1,5 +1,6 @@
 package maoko.http.conf;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +11,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "http-server")
+@Data
 public class HttpPlatConf {
 
-    private String serverIP = "109.64.20.99";
-    private int serverPort = 6070;
+    private String serverIP;
+    private int serverPort;
 
     private String urlStart;
 
