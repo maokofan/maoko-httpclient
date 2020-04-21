@@ -4,16 +4,14 @@ package maoko.http.conf;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import maoko.common.DateFormatUtil;
-import maoko.common.gson.JSONUtil;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,13 +23,11 @@ import java.util.List;
  * @author fanpei
  */
 @Configuration
-public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
-    /*
+public class WebMvcConfiguration extends WebMvcConfigurationSupport {
+    /**
      * gson替换
      *
-     * @see
-     * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#
-     * configureMessageConverters(java.util.List)
+     * @param converters
      */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
