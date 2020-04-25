@@ -1,0 +1,14 @@
+#远程Http Server配置
+http-server:
+  serverIP: 127.0.0.1
+  serverPort: 8189
+
+#客户端池配置
+http-client:
+  maxTotal: 100                    #最大连接数
+  defaultMaxPerRoute: 50           #并发数
+  connectTimeout: 1000             #创建连接最长超时时间
+  connectionRequestTimeout: 5000    #从连接池中获取连接的最长时间
+  socketTimeout: 10000             #等待数据超时时间
+  idelConectionCloseTimeout: 30000 #空闲Client关闭时长
+

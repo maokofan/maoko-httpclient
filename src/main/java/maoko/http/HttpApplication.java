@@ -13,10 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * @author maoko
  */
-@PropertySource("classpath:application.yml")
-@SpringBootApplication
-public class HttpApplication implements CommandLineRunner {
-    @Override
+public class HttpApplication {
     public void run(String... args) throws Exception {
         System.out.println("http client has started");
     }
