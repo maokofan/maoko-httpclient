@@ -1,5 +1,6 @@
 package maoko.http;
 
+import maoko.sdk.SDKCommon;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +8,6 @@ import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfig
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
-
 
 
 /**
@@ -18,6 +18,6 @@ import org.springframework.context.annotation.PropertySource;
 public class HttpApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("http client start.....");
+        System.out.println("http client has started");
     }
 }
