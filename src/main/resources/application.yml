@@ -1,7 +1,6 @@
 #远程Http Server配置
 http-server:
-  serverIP: 127.0.0.1
-  serverPort: 8189
+  serverURL: 127.0.0.1:8189
 
 #客户端池配置
 http-client:

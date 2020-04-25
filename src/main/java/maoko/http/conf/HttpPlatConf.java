@@ -13,22 +13,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "http-server")
 @Data
 public class HttpPlatConf {
-
-    private String serverIP;
-    private int serverPort;
-
-    private String urlStart;
-
-    /**
-     * 获取URL起始地址
-     *
-     * @return
-     */
-    public String getUrlStart() {
-        if (null == urlStart) {
-            StringBuilder builder = new StringBuilder("http://");
-            urlStart = builder.append(serverIP).append(":").append(Integer.toString(serverPort)).toString();
-        }
-        return urlStart;
-    }
+    private String serverURL;
 }

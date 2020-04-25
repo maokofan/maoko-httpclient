@@ -4,9 +4,9 @@ package maoko.http.core;
 import maoko.common.DateFormatUtil;
 import maoko.http.conf.HttpPlatConf;
 import maoko.http.core.entity.HttpParams;
-import maoko.http.exception.HttpQueryException;
 import maoko.http.core.entity.HttpResult;
 import maoko.http.core.entity.UrlParam;
+import maoko.http.exception.HttpQueryException;
 import org.apache.http.HttpRequest;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -137,8 +137,8 @@ public class HttpApiService {
      */
     private URI genURLWithParams(HttpParams param)
             throws ParseException, UnsupportedEncodingException, IOException, URISyntaxException {
-        // 获取前置url
-        String url = param.getUrl();
+        // 组装完整url
+        String url = new StringBuilder(conf.getServerURL()).append(param.getUrl()).toString();
         // 设置url请求参数
         URIBuilder builder = new URIBuilder(url);
         if (param.getParams() != null && !param.getParams().isEmpty()) {
