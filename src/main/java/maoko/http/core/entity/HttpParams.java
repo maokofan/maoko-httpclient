@@ -63,7 +63,6 @@ public abstract class HttpParams {
      */
     public HttpParams() {
         this.method = HttpMethod.GET;
-        //this.searchParams = new SearchParam();
     }
 
     /**
@@ -72,7 +71,6 @@ public abstract class HttpParams {
      * @param body   body JSON字符串格式参数
      */
     public HttpParams(HttpMethod method, List<UrlParam> params, String body) {
-        //this.searchParams = new SearchParam();
         this.method = method;
         this.params = params;
         this.body = body;
