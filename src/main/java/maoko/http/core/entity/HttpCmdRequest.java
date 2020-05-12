@@ -4,30 +4,31 @@ import org.apache.http.Header;
 import org.springframework.http.HttpMethod;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- * http参数基类
+ * http命令基类
  *
  * @author fanpei
  */
-public abstract class HttpParams {
+public abstract class HttpCmdRequest {
     /**
      * 方法  -无需params手动设置
      */
-    protected HttpMethod method;
+    private HttpMethod method;
     /**
      * 头
      */
-    protected List<Header> headers;
+    private List<Header> headers;
     /**
      * 地址参数
      */
-    protected List<UrlParam> params;
+    private List<UrlParam> params;
     /**
      * body信息-json格式
      */
-    protected String body;
+    private String body;
 
 
     /**
@@ -61,7 +62,7 @@ public abstract class HttpParams {
     /**
      * 默认构造函数
      */
-    public HttpParams() {
+    public HttpCmdRequest() {
         this.method = HttpMethod.GET;
     }
 
@@ -70,7 +71,7 @@ public abstract class HttpParams {
      * @param params url参数
      * @param body   body JSON字符串格式参数
      */
-    public HttpParams(HttpMethod method, List<UrlParam> params, String body) {
+    public HttpCmdRequest(HttpMethod method, List<UrlParam> params, String body) {
         this.method = method;
         this.params = params;
         this.body = body;
@@ -84,7 +85,7 @@ public abstract class HttpParams {
      */
     public void addUrlParam(String key, String value) {
         if (params == null) {
-            params = new ArrayList<>(3);
+            params = new LinkedList<>();
         }
         params.add(new UrlParam(key, value));
     }
@@ -96,8 +97,12 @@ public abstract class HttpParams {
      */
     public void addHeader(Header header) {
         if (headers == null) {
-            headers = new ArrayList<>(3);
+            headers = new LinkedList<>();
         }
         headers.add(header);
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }

@@ -3,7 +3,7 @@ package maoko.http.core;
 
 import maoko.common.DateFormatUtil;
 import maoko.http.conf.HttpPlatConf;
-import maoko.http.core.entity.HttpParams;
+import maoko.http.core.entity.HttpCmdRequest;
 import maoko.http.core.entity.HttpResult;
 import maoko.http.core.entity.UrlParam;
 import maoko.http.exception.HttpQueryException;
@@ -47,7 +47,7 @@ public class HttpApiService {
      * @return
      * @throws Exception
      */
-    public HttpResult sendRequest2Server(HttpParams params) throws Exception {
+    public HttpResult sendRequest2Server(HttpCmdRequest params) throws Exception {
         if (params == null) {
             throw new Exception("http params is null");
         }
@@ -85,7 +85,7 @@ public class HttpApiService {
      * @throws ClientProtocolException
      * @throws HttpQueryException
      */
-    private HttpResult doRequest(HttpUriRequest httpRequest, HttpParams param)
+    private HttpResult doRequest(HttpUriRequest httpRequest, HttpCmdRequest param)
             throws IOException, ClientProtocolException, HttpQueryException {
         HttpResult result = null;
         CloseableHttpResponse response = null;
@@ -135,7 +135,7 @@ public class HttpApiService {
      * @throws IOException
      * @throws URISyntaxException
      */
-    private URI genURLWithParams(HttpParams param)
+    private URI genURLWithParams(HttpCmdRequest param)
             throws ParseException, UnsupportedEncodingException, IOException, URISyntaxException {
         // 组装完整url
         String url = new StringBuilder(conf.getServerURL()).append(param.getUrl()).toString();
@@ -157,7 +157,7 @@ public class HttpApiService {
      * @return
      * @throws IOException
      */
-    private void printRequest(HttpParams param, HttpRequest httpRequest) throws IOException {
+    private void printRequest(HttpCmdRequest param, HttpRequest httpRequest) throws IOException {
         StringBuilder requestSb = new StringBuilder();
         requestSb.append("<--发送请求信息，请求时间：").append(DateFormatUtil.dateformat(new Date()))
                 .append(System.lineSeparator());
