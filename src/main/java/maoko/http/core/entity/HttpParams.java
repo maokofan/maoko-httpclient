@@ -23,11 +23,11 @@ public abstract class HttpParams {
     /**
      * 地址参数
      */
-    private List<UrlParam> params;
+    protected List<UrlParam> params;
     /**
      * body信息-json格式
      */
-    private String body;
+    protected String body;
 
 
     /**
