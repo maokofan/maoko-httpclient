@@ -50,14 +50,18 @@ public abstract class HttpCmdRequest {
      *
      * @return
      */
-    public abstract List<UrlParam> getParams();
+    public List<UrlParam> getParams() {
+        return params;
+    }
 
     /**
      * 获取body发送参数
      *
      * @return
      */
-    public abstract String getBody();
+    public String getBody() {
+        return body;
+    }
 
     /**
      * 默认构造函数
