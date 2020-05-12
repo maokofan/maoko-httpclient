@@ -43,19 +43,19 @@ public class HttpApiService {
     /**
      * 向服务端发送请求并返回 body String
      *
-     * @param params
+     * @param cmdRequest
      * @return
      * @throws Exception
      */
-    public HttpResult sendRequest2Server(HttpCmdRequest params) throws Exception {
-        if (params == null) {
+    public HttpResult sendRequest2Server(HttpCmdRequest cmdRequest) throws Exception {
+        if (cmdRequest == null) {
             throw new Exception("http params is null");
         }
 
         HttpResult result = null;
         HttpUriRequest httpRequest = null;
-        URI url = genURLWithParams(params);
-        switch (params.getMethod()) {
+        URI url = genURLWithParams(cmdRequest);
+        switch (cmdRequest.getMethod()) {
             case GET:
                 httpRequest = new HttpGet(url);
                 break;
@@ -71,7 +71,7 @@ public class HttpApiService {
             default:
                 break;
         }
-        result = doRequest(httpRequest, params);
+        result = doRequest(httpRequest, cmdRequest);
         return result;
     }
 
