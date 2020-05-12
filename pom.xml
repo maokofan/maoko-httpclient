@@ -21,43 +21,15 @@
         <version>2.2.6.RELEASE</version>
     </parent>
     <dependencies>
-        <!--spring boot web依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <!--为配置log4j2 需排除logback -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-                <!--为配置Gson 需排除json -->
-                <exclusion>
-                    <groupId>jackson-databind</groupId>
-                    <artifactId>com.fasterxml.jackson.core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!--spring boot 测试相关 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <!-- 配置属性相关 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
-        </dependency>
-        <!-- log4j2配置 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
         </dependency>
         <!--   http-->
         <dependency>
@@ -74,7 +46,6 @@
             <artifactId>maoko.common</artifactId>
             <version>0.0.3</version>
         </dependency>
-
     </dependencies>
 
     <build>
