@@ -31,7 +31,8 @@ public class HttpApiService {
     private static final String ENCODING = "UTF-8";
     private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
     private static final String HEADER_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36";
-    private static final String HEADER_ACCEPT = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+    private static final String HEADER_ACCEPT = "*/*";
+    private static final String HEADER_ACCEPT_ENCODING = "gzip, deflate, br";
     // private static final String HEADER_ACCEPT_LANGUAGE = "zh-CN,zh;q=0.9";
 
     @Autowired
@@ -95,6 +96,7 @@ public class HttpApiService {
             httpRequest.setHeader("Content-Type", CONTENT_TYPE);
             httpRequest.setHeader("User-Agent", HEADER_USER_AGENT);
             httpRequest.setHeader("Accept", HEADER_ACCEPT);
+            httpRequest.setHeader("Accept-Encoding",HEADER_ACCEPT_ENCODING);
             // httpRequest.setHeader("Accept-Language", HEADER_ACCEPT_LANGUAGE);
 
             // 设置body请求参数
