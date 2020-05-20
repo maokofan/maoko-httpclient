@@ -1,5 +1,6 @@
 package maoko.http.core.entity;
 
+import maoko.common.gson.JSONUtil;
 import org.apache.http.Header;
 import org.springframework.http.HttpMethod;
 
@@ -108,5 +109,9 @@ public abstract class HttpCmdRequest {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public void setBody(Object bodyObj) {
+        this.body = JSONUtil.genJsonStr(bodyObj);
     }
 }
