@@ -38,8 +38,6 @@ public class HttpApiService {
     @Autowired
     private CloseableHttpClient httpClient;
 
-    @Autowired
-    private HttpPlatConf conf;
 
     /**
      * 向服务端发送请求并返回 body String
@@ -140,7 +138,7 @@ public class HttpApiService {
     private URI genURLWithParams(HttpCmdRequest param)
             throws ParseException, UnsupportedEncodingException, IOException, URISyntaxException {
         // 组装完整url
-        String url = new StringBuilder(conf.getServerURL()).append(param.getUrl()).toString();
+        String url = param.getUrl();
         // 设置url请求参数
         URIBuilder builder = new URIBuilder(url);
         if (param.getParams() != null && !param.getParams().isEmpty()) {
