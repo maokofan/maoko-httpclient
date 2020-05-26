@@ -2,6 +2,8 @@ package maoko.http.core;
 
 
 import maoko.common.DateFormatUtil;
+import maoko.common.log.IWriteLog;
+import maoko.common.log.Log4j2Writer;
 import maoko.http.conf.HttpPlatConf;
 import maoko.http.core.entity.HttpCmdRequest;
 import maoko.http.core.entity.HttpResult;
@@ -28,6 +30,7 @@ import java.util.Date;
  */
 @Service
 public class HttpApiService {
+    private static final IWriteLog log=new Log4j2Writer(HttpApiService.class);
     private static final String ENCODING = "UTF-8";
     private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
     private static final String HEADER_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36";
@@ -159,7 +162,7 @@ public class HttpApiService {
      */
     private void printRequest(HttpCmdRequest param, HttpRequest httpRequest) throws IOException {
         StringBuilder requestSb = new StringBuilder();
-        requestSb.append("<--发送请求信息，请求时间：").append(DateFormatUtil.dateformat(new Date()))
+        requestSb.append(System.lineSeparator()).append("<--发送请求信息，请求时间：").append(DateFormatUtil.dateformat(new Date()))
                 .append(System.lineSeparator());
         requestSb.append("请求方法：").append(httpRequest.toString()).append(System.lineSeparator());
         if (httpRequest instanceof HttpEntityEnclosingRequestBase) {
@@ -171,7 +174,7 @@ public class HttpApiService {
                 requestSb.append("请求body:").append(param.getBody());
             }
         }
-        System.out.println(requestSb.toString());
+        log.debug(requestSb.toString());
     }
 
     /**
@@ -183,10 +186,10 @@ public class HttpApiService {
      */
     private void printReponse(HttpUriRequest request, HttpResult result) {
         StringBuilder requestSb = new StringBuilder();
-        requestSb.append("-->解析请求返回，返回时间：").append(DateFormatUtil.dateformat(new Date()))
+        requestSb.append(System.lineSeparator()).append("-->解析请求返回，返回时间：").append(DateFormatUtil.dateformat(new Date()))
                 .append(System.lineSeparator());
         requestSb.append("请求地址：").append(request.getURI().toString()).append(System.lineSeparator());
         requestSb.append("返回详情:").append(result.toString()).append(System.lineSeparator());
-        System.out.println(requestSb.toString());
+        log.debug(requestSb.toString());
     }
 }
